@@ -1,0 +1,29 @@
+<%-include('partials/header.ejs')%>
+
+<form action="/add" method="post" class="ms-5 me-5">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1"placeholder="Title of the book"<%if(locals.error){%> value="<%=error%>"<%}%> name="title">  
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Short note</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="short_note"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="rating">Rate your book:</label>
+        <select class="form-select" aria-label="Default select example" id="rating" name="rating" required>
+            <option selected value="">Rate this book (out of 5)</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-success" type="submit">Submit</button>
+      </div>
+</form>
+
+<%-include('partials/footer.ejs')%>
