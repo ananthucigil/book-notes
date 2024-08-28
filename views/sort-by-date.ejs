@@ -1,0 +1,35 @@
+<%-include('partials/header.ejs')%>
+<%data.forEach((elem)=>{%>
+  <h2 class="bg-primary text-white p-3"><%=elem.date%></h2>
+  <%elem.data.forEach((elem)=>{%>
+    <div class="card" style="width: 18rem;">
+        <img src="https://covers.openlibrary.org/b/olid/<%=elem.cover_key%>-L.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%=elem.title%></h5>
+          <h6><%=elem.author_name%></h6>
+          <p class="card-text"><%=elem.short_note%></p>
+          <p class="card-text">Rating: <%=elem.rating%></p>
+          <a href="/edit/<%=elem.id%>" class="btn btn-warning">Edit</a>
+          <form action="/delete" method="post" style="display: inline-block;">
+            <input type="hidden" name="deleteId" value="<%=elem.id%>">
+            <button type="button" onclick="deleteFunction('<%=elem.id%>')" class="btn btn-danger">Delete</button>
+            <div id="deleteDiv<%=elem.id%>" style="display:none;">
+              <p>Are you sure you want to delete this book?</p>
+              <button type="button" onclick="cancelFunction('<%=elem.id%>')" class="btn btn-secondary">NO</button>
+              <button type="submit" class="btn btn-danger">YES</button>
+            </div> 
+          </form>
+        </div>
+      </div>
+  <%})%>
+
+<%})%>
+<script>
+    function deleteFunction(id){
+      document.getElementById(`deleteDiv${id}`).removeAttribute('style'); 
+    }
+    function cancelFunction(id){
+      document.getElementById(`deleteDiv${id}`).setAttribute('style','display:none');
+    }
+  </script>
+<%-include('partials/footer.ejs')%>

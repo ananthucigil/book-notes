@@ -9,7 +9,7 @@
               <h6><%=element.author_name%></h6>
               <p class="card-text"><%=element.short_note%></p>
               <p>Date: <%=element.title_date%></p>
-              <p id="rating<%=element.id%>"><%=element.rating%></p>
+              <p id="rating<%=element.id%>">Rating: <%=element.rating%></p>
                 <a href="/edit/<%=element.id%>" class="btn btn-warning">Edit</a>
                 <form action="/delete" method="post" style="display: inline-block;">
                   <input type="hidden" name="deleteId" value="<%=element.id%>">
