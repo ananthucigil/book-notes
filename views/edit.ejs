@@ -1,0 +1,23 @@
+<%-include('partials/header.ejs')%>
+  <div class="container">
+    <div class="row m-auto">
+        <%data.forEach((element)=>{%>
+        <div style="width: 35rem;">
+            <img src="https://covers.openlibrary.org/b/olid/<%=element.cover_key%>-L.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%=element.title%></h5>
+              <h6><%=element.author_name%></h6>
+              <form action="/edit" method="post">
+                <label for="short_note">Short Note:</label>
+                <textarea id="short_note" type="text" class="card-text form-control" name="short_note" rows="5"><%=element.short_note%></textarea>
+                <p>Date: <%=element.title_date%></p>
+                <label for="rating">Rating:</label>
+                <input class="form-control" id="rating" type="number" name="rating" value="<%=element.rating%>" min="1" max="5">
+                <button type="submit" class="btn btn-primary">Submit</button> 
+              </form>
+            </div>
+          </div>
+        <%})%>  
+    </div>
+  </div>
+<%-include('partials/footer.ejs')%>
