@@ -1,6 +1,17 @@
 <%-include('partials/header.ejs')%>
-<%data.forEach((elem)=>{%>  
-  <h2 class="bg-primary text-white p-3 text-center"><%=elem.date%></h2>
+<%data.forEach((elem)=>{%>
+    <%
+    let stars="";
+    switch (elem.rating) { 
+      case 1: stars = 'Rating: ★☆☆☆☆'; break;
+      case 2: stars = 'Rating: ★★☆☆☆'; break; 
+      case 3: stars = 'Rating: ★★★☆☆'; break; 
+      case 4: stars = 'Rating: ★★★★☆'; break; 
+      case 5: stars = 'Rating: ★★★★★'; break;
+      default: stars = 'No Rating'; break;
+    } 
+  %>     
+  <h2 class="bg-primary text-white p-3 text-center"><%=stars%></h2>
   <%elem.data.forEach((elem)=>{%>
     <div class="card" style="width: 18rem;">
         <img src="https://covers.openlibrary.org/b/olid/<%=elem.cover_key%>-L.jpg" class="card-img-top" alt="...">
@@ -8,18 +19,7 @@
           <h5 class="card-title"><%=elem.title%></h5>
           <h6><%=elem.author_name%></h6>
           <p class="card-text"><%=elem.short_note%></p>
-          <%
-          let stars="";
-          switch (elem.rating) { 
-            case 1: stars = 'Rating: ★☆☆☆☆'; break;
-            case 2: stars = 'Rating: ★★☆☆☆'; break; 
-            case 3: stars = 'Rating: ★★★☆☆'; break; 
-            case 4: stars = 'Rating: ★★★★☆'; break; 
-            case 5: stars = 'Rating: ★★★★★'; break;
-            default: stars = 'No Rating'; break;
-          } 
-        %>   
-          <p class="card-text"><%=stars%></p>
+          <p class="card-text">Rating: <%=elem.rating%></p>
           <a href="/edit/<%=elem.id%>" class="btn btn-warning">Edit</a>
           <form action="/delete" method="post" style="display: inline-block;">
             <input type="hidden" name="deleteId" value="<%=elem.id%>">

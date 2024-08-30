@@ -2,24 +2,35 @@
   <div class="container">
     <div class="row ms-5 me-5">
         <%data.forEach((element)=>{%>
-        <div class="card col-lg-6" style="width: 18rem;">
+        <div class="card" style="width: 18rem;">
             <img src="https://covers.openlibrary.org/b/olid/<%=element.cover_key%>-L.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title"><%=element.title%></h5>
               <h6><%=element.author_name%></h6>
               <p class="card-text"><%=element.short_note%></p>
               <p>Date: <%=element.title_date%></p>
-              <p id="rating<%=element.id%>">Rating: <%=element.rating%></p>
-                <a href="/edit/<%=element.id%>" class="btn btn-warning">Edit</a>
-                <form action="/delete" method="post" style="display: inline-block;">
-                  <input type="hidden" name="deleteId" value="<%=element.id%>">
-                  <button type="button" onclick="deleteFunction('<%=element.id%>')" class="btn btn-danger">Delete</button>
-                  <div id="deleteDiv<%=element.id%>" style="display:none;">
-                    <p>Are you sure you want to delete this book?</p>
-                    <button type="button" onclick="cancelFunction('<%=element.id%>')" class="btn btn-secondary">NO</button>
-                    <button type="submit" class="btn btn-danger">YES</button>
-                  </div> 
-                </form>
+              <%
+                let stars="";
+                switch (element.rating) { 
+                  case 1: stars = 'Rating: ★☆☆☆☆'; break;
+                  case 2: stars = 'Rating: ★★☆☆☆'; break; 
+                  case 3: stars = 'Rating: ★★★☆☆'; break; 
+                  case 4: stars = 'Rating: ★★★★☆'; break; 
+                  case 5: stars = 'Rating: ★★★★★'; break;
+                  default: stars = 'No Rating'; break;
+                } 
+              %>   
+              <p id="rating<%=element.id%>"><%=stars%></p> 
+              <a href="/edit/<%=element.id%>" class="btn btn-warning">Edit</a>
+              <form action="/delete" method="post" style="display: inline-block;">
+                <input type="hidden" name="deleteId" value="<%=element.id%>">
+                <button type="button" onclick="deleteFunction('<%=element.id%>')" class="btn btn-danger">Delete</button>
+                <div id="deleteDiv<%=element.id%>" style="display:none;">
+                  <p>Are you sure you want to delete this book?</p>
+                  <button type="button" onclick="cancelFunction('<%=element.id%>')" class="btn btn-secondary">NO</button>
+                  <button type="submit" class="btn btn-danger">YES</button>
+                </div> 
+              </form>
             </div>
           </div>
         <%})%>  

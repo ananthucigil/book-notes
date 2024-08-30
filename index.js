@@ -57,8 +57,15 @@ app.get('/sort/date',async(req, res)=>{
   res.render('sort-by-date.ejs',{data: sortByDate}) 
 })
 
-app.get('sort/rating',(req,res)=>{
-
+app.get('/sort/rating',async(req,res)=>{
+    const data = await db.query('SELECT DISTINCT rating FROM books');
+    let ratings = data.rows.map((elem)=>elem.rating);
+    let sortByRating = [];
+    for(let elem of ratings){
+      const data = await db.query('SELECT * FROM books WHERE rating = $1', [elem]);
+      sortByRating.push({ rating: elem, data: data.rows });
+    }
+    res.render('sort-by-rating.ejs',{data: sortByRating}) 
 })
 
 app.post('/add',async(req,res)=>{
