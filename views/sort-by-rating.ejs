@@ -19,7 +19,13 @@
           <h5 class="card-title"><%=elem.title%></h5>
           <h6><%=elem.author_name%></h6>
           <p class="card-text"><%=elem.short_note%></p>
-          <p class="card-text">Rating: <%=elem.rating%></p>
+          <%if(elem.title_date===today){%>
+            <p>Date: Today</p>
+          <%}else if(elem.title_date===yesterday){%>
+            <p>Date: Yesterday</p>
+          <%}else{%>
+            <p>Date: <%=elem.title_date%></p>
+          <%}%>    
           <a href="/edit/<%=elem.id%>" class="btn btn-warning">Edit</a>
           <form action="/delete" method="post" style="display: inline-block;">
             <input type="hidden" name="deleteId" value="<%=elem.id%>">

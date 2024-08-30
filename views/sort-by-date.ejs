@@ -1,6 +1,12 @@
 <%-include('partials/header.ejs')%>
 <%data.forEach((elem)=>{%>  
-  <h2 class="bg-primary text-white p-3 text-center"><%=elem.date%></h2>
+    <%if(elem.date===today){%>
+        <h2 class="bg-primary text-white p-3 text-center">Today</h2>
+      <%}else if(elem.date===yesterday){%>
+        <h2 class="bg-primary text-white p-3 text-center">Yesterday</h2>
+      <%}else{%>
+        <h2 class="bg-primary text-white p-3 text-center"><%=elem.date%></h2>
+      <%}%>      
   <%elem.data.forEach((elem)=>{%>
     <div class="card" style="width: 18rem;">
         <img src="https://covers.openlibrary.org/b/olid/<%=elem.cover_key%>-L.jpg" class="card-img-top" alt="...">

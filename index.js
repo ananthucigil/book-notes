@@ -54,7 +54,9 @@ app.get('/sort/date',async(req, res)=>{
     const data = await db.query('SELECT * FROM books WHERE title_date = $1', [elem]);
     sortByDate.push({ date: elem, data: data.rows });
   }
-  res.render('sort-by-date.ejs',{data: sortByDate}) 
+  let dateToday = dateFinder(new Date());
+  let yesterday = dateYesterday();
+  res.render('sort-by-date.ejs',{data: sortByDate, today: dateToday, yesterday: yesterday}) 
 })
 
 app.get('/sort/rating',async(req,res)=>{
@@ -65,7 +67,9 @@ app.get('/sort/rating',async(req,res)=>{
       const data = await db.query('SELECT * FROM books WHERE rating = $1', [elem]);
       sortByRating.push({ rating: elem, data: data.rows });
     }
-    res.render('sort-by-rating.ejs',{data: sortByRating}) 
+    let dateToday = dateFinder(new Date());
+    let yesterday = dateYesterday();
+    res.render('sort-by-rating.ejs',{data: sortByRating, today: dateToday, yesterday: yesterday}) 
 })
 
 app.post('/add',async(req,res)=>{

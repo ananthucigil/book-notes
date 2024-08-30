@@ -8,7 +8,13 @@
               <h5 class="card-title"><%=element.title%></h5>
               <h6><%=element.author_name%></h6>
               <p class="card-text"><%=element.short_note%></p>
-              <p>Date: <%=element.title_date%></p>
+              <%if(element.title_date===today){%>
+                <p>Date: Today</p>
+              <%}else if(element.title_date===yesterday){%>
+                <p>Date: Yesterday</p>
+              <%}else{%>
+                <p>Date: <%=element.title_date%></p>
+              <%}%>    
               <%
                 let stars="";
                 switch (element.rating) { 
