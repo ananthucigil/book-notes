@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row ms-5 me-5">
         <%data.forEach((element)=>{%>
-        <div class="card" style="width: 18rem;">
+          <div class="card m-5" style="width: 18rem;">
             <img src="https://covers.openlibrary.org/b/olid/<%=element.cover_key%>-L.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title"><%=element.title%></h5>
-              <h6><%=element.author_name%></h6>
+              <h3 class="card-title"><%=element.title%></h3>
+              <h4><%=element.author_name%></h4>
               <p class="card-text"><%=element.short_note%></p>
               <%if(element.title_date===today){%>
                 <p>Date: Today</p>

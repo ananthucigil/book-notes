@@ -1,45 +1,46 @@
 <%-include('partials/header.ejs')%>
 <%data.forEach((elem)=>{%>  
     <%if(elem.date===today){%>
-        <h2 class="bg-primary text-white p-3 text-center">Today</h2>
+        <h4 class="bg-primary text-white p-3 text-center">Today</h4>
       <%}else if(elem.date===yesterday){%>
-        <h2 class="bg-primary text-white p-3 text-center">Yesterday</h2>
+        <h4 class="bg-primary text-white p-3 text-center">Yesterday</h4>
       <%}else{%>
-        <h2 class="bg-primary text-white p-3 text-center"><%=elem.date%></h2>
-      <%}%>      
-  <%elem.data.forEach((elem)=>{%>
-    <div class="card" style="width: 18rem;">
-        <img src="https://covers.openlibrary.org/b/olid/<%=elem.cover_key%>-L.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%=elem.title%></h5>
-          <h6><%=elem.author_name%></h6>
-          <p class="card-text"><%=elem.short_note%></p>
-          <%
-          let stars="";
-          switch (elem.rating) { 
-            case 1: stars = 'Rating: ★☆☆☆☆'; break;
-            case 2: stars = 'Rating: ★★☆☆☆'; break; 
-            case 3: stars = 'Rating: ★★★☆☆'; break; 
-            case 4: stars = 'Rating: ★★★★☆'; break; 
-            case 5: stars = 'Rating: ★★★★★'; break;
-            default: stars = 'No Rating'; break;
-          } 
-        %>   
-          <p class="card-text"><%=stars%></p>
-          <a href="/edit/<%=elem.id%>" class="btn btn-warning">Edit</a>
-          <form action="/delete" method="post" style="display: inline-block;">
-            <input type="hidden" name="deleteId" value="<%=elem.id%>">
-            <button type="button" onclick="deleteFunction('<%=elem.id%>')" class="btn btn-danger">Delete</button>
-            <div id="deleteDiv<%=elem.id%>" style="display:none;">
-              <p>Are you sure you want to delete this book?</p>
-              <button type="button" onclick="cancelFunction('<%=elem.id%>')" class="btn btn-secondary">NO</button>
-              <button type="submit" class="btn btn-danger">YES</button>
-            </div> 
-          </form>
+        <h4 class="bg-primary text-white p-3 text-center"><%=elem.date%></h4>
+    <%}%> 
+    <div class="container d-flex align-items-center justify-content-center">     
+      <%elem.data.forEach((elem)=>{%>
+        <div class="card d-flex align-items-center justify-content-center" style="width: 18rem;">
+            <img src="https://covers.openlibrary.org/b/olid/<%=elem.cover_key%>-L.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%=elem.title%></h5>
+              <h6><%=elem.author_name%></h6>
+              <p class="card-text"><%=elem.short_note%></p>
+              <%
+              let stars="";
+              switch (elem.rating) { 
+                case 1: stars = 'Rating: ★☆☆☆☆'; break;
+                case 2: stars = 'Rating: ★★☆☆☆'; break; 
+                case 3: stars = 'Rating: ★★★☆☆'; break; 
+                case 4: stars = 'Rating: ★★★★☆'; break; 
+                case 5: stars = 'Rating: ★★★★★'; break;
+                default: stars = 'No Rating'; break;
+              } 
+              %>   
+              <p class="card-text"><%=stars%></p>
+              <a href="/edit/<%=elem.id%>" class="btn btn-warning">Edit</a>
+              <form action="/delete" method="post" style="display: inline-block;">
+                <input type="hidden" name="deleteId" value="<%=elem.id%>">
+                <button type="button" onclick="deleteFunction('<%=elem.id%>')" class="btn btn-danger">Delete</button>
+                <div id="deleteDiv<%=elem.id%>" style="display:none;">
+                  <p>Are you sure you want to delete this book?</p>
+                  <button type="button" onclick="cancelFunction('<%=elem.id%>')" class="btn btn-secondary">NO</button>
+                  <button type="submit" class="btn btn-danger">YES</button>
+                </div> 
+              </form>
+            </div>
         </div>
-      </div>
-  <%})%>
-
+      <%})%>
+    </div>
 <%})%>
 <script>
     function deleteFunction(id){
